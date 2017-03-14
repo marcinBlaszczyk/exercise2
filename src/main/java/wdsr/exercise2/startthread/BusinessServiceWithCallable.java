@@ -1,5 +1,6 @@
 package wdsr.exercise2.startthread;
 
+import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 
@@ -26,7 +27,18 @@ public class BusinessServiceWithCallable {
 		// 2. submit all Callable objects to executorService (executorService.submit or executorService.invokeAll)
 		// 3. sum up the results - each random number can be retrieved using future.get() method.
 		// 4. return the computed result.
-		
+		for(int i=0; i<100; i++){
+		Callable call = new Callable()
+				{
+
+					@Override
+					public Object call() throws Exception {
+						return helper.nextRandom();
+					}
+			
+				};
+				result+=(Integer)executorService.submit(call).get();
+		}
 		return result;
 	}
 }

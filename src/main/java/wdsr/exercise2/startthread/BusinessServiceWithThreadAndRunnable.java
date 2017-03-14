@@ -1,6 +1,6 @@
 package wdsr.exercise2.startthread;
 
-public class BusinessServiceWithThreadAndRunnable {
+public class BusinessServiceWithThreadAndRunnable{
 	private NumericHelper helper;
 	
 	public BusinessServiceWithThreadAndRunnable(NumericHelper helper) {
@@ -15,7 +15,19 @@ public class BusinessServiceWithThreadAndRunnable {
 	 */
 	public void computeFibonacci(int n, FibonacciCallback callback) {
 		// TODO Task: execute the logic below in a new Thread, use Runnable interface.
-		long value = helper.findFibonacciValue(n);
-		callback.fibonacciComputed(value);
+		Runnable runFib = new Runnable(){
+
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				long value = helper.findFibonacciValue(n);
+				callback.fibonacciComputed(value);
+			}
+		
+		};
+		
+		Thread watek = new Thread(runFib);
+		watek.start();
+
 	}
 }
