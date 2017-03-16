@@ -14,12 +14,12 @@ public class SimpleCountingFacade implements CountingFacade {
 		this.businessService = businessService;
 	}
 	
-	public void countAndInvoke() {
+	public synchronized void countAndInvoke() {
 		invocationCounter++;
 		businessService.executeAction();
 	}
 	
-	public int getCount() {
+	public synchronized int getCount() {
 		return invocationCounter;
 	}
 }
